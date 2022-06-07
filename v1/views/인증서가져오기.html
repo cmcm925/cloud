@@ -1,0 +1,199 @@
+<!doctype html>
+
+<html lang="ko">
+    <head>
+        <title>클라우드 공동인증서 서비스</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="/cloud/v1/styles/css/tsign_cloud_style.css">
+    </head>
+
+<body>
+    <script src="/cloud/v1/js/jquery-3.6.0.min.js"></script>
+    <script src="/cloud/v1/js/lib/jsrose_crypto.js"></script>
+    <script src="/cloud/v1/js/lib/jsrose.js"></script>
+    <script src="/cloud/v1/js/lib/aes.js"></script>    
+    <script src="/cloud/v1/js/lib/cloudWeb.js"></script>
+
+
+<!-- 클라우드인증 전체 감싸는 DIV START -->
+<div id="tsignCloudBgWrapper" style="display:block;">
+
+    <nav class="pushy pushy-left" data-focus="#first-link" aria-labelledby="navigation-area1">
+        <h1 class="wa-hide" id="navigation-area1">네비게이션 영역</h1>
+        <div class="pushy-content">
+            <ul class="mftlist">
+                <li>
+                    <h2 class="tit">계정</h2>
+                    <ul>
+                        <li class="pushy-link"><a href="#" title="연결끊기" id="mDisconnect" class="big-link" data-reveal-id="disconnect_modal" role="button">연결끊기</a></li>
+                        <li class="pushy-link"><a href="#" title="자동연결조회" id="mDelAutoconnect" role="button">자동연결조회</a></li>
+                        <li class="pushy-link"><a href="#" title="계정탈퇴하기" id="mDeleteAccount" role="button">계정탈퇴하기</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="tit">고객지원</h2>
+                    <ul>
+                        <li class="pushy-link"><a href="#" title="새창열림" target="_blank">이용안내</a></li>
+                        <li class="pushy-link"><a href="#" title="새창열림" target="_blank">고객센터</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Site Overlay -->
+    <div class="site-overlay"></div>
+    <div class="certWrap">
+        <div class="screenblock" id="screen_block"></div>
+        <div class="loadingblock" id="loading_block"><div class="ldrSpinner"></div></div>
+        <a href="#" title="클라우드인증 창닫기" id="close" class="closeBtn big-link" data-reveal-id="close_modal" role="button">
+            <span> </span>
+            <span> </span>
+        </a>
+        <div id="container">
+            <button type="button" class="menu-btn" title="메뉴토글버튼">
+                <span> </span>
+                <span> </span>
+                <span> </span>
+            </button>
+            <a href="#" class="closeBtn closeBtn2 big-link" data-reveal-id="close_modal" title="클라우드인증 창닫기" role="button">
+                <span> </span>
+                <span> </span>
+            </a>
+            <a href="#" class="prevBtn" title="뒤로가기" style="display: none;" role="button">
+                <span> </span>
+                <span> </span>
+                <span> </span>
+            </a>
+            <main class="crtfCont" id="content">
+                <div class="ui_content">
+                    <p class="userTit fntClr1"><span class="fnt14bd">장*</span>님의 클라우드 공동인증서비스</p>
+                    <h1 class="fntBold">인증서 가져오기</h1>
+                    <div class="imftBox">
+                        <ul class="imrtList">
+                            <li id="importPC" class="imrtDisable">
+                                <a title="PC인증서가져오기">
+                                    <h4 class="fntClr1">PC 인증서 가져오기</h4>
+                                    <p>하드디스크 혹은 이동식디스크에 있는 인증서를 클라우드로 가져옵니다</p>
+                                </a>
+                            </li>
+                            <li id="relayImport" class="imrtDisable">
+                                <a title="스마트기기에서가져오기">
+                                    <h4>스마트 기기에서 가져오기</h4>
+                                    <p>스마트 기기에 저장된 인증서를 클라우드로 가져옵니다</p>
+                                </a>
+                            </li>
+                            <li id="issue">
+                                <a href="#" title="공동인증서발급및등록">
+                                    <h4>공동인증서 (재)발급 및 등록</h4>
+                                    <p>공동인증서를 (재)발급 하여 클라우드로 가져옵니다</p>
+                                </a>
+                            </li>
+                            <li id="importPfx">
+                                <a href="#" title="인증서파일가져오기">
+                                    <h4>인증서 파일 가져오기</h4>
+                                    <p>인증서 내보내기를 통해 P12포맷의 인증서파일 혹은 인증서 파일 위치를 알고있다면 직접 가져올 수 있습니다</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btnWrap">
+                        <a href="#" class="cancelBtn bckClr3 brdrClr1 fntClr1 full" title="이전" role="button">이전</a>
+                    </div>
+                </div>
+            </main>
+            <nav class="footer bckClr6" aria-labelledby="navigation-area2">
+                <h1 class="wa-hide" id="navigation-area2">네비게이션 영역</h1>
+                <ul class="ftlist">
+                    <li>
+                        <h2 class="tit fntClr3">계정</h2>
+                        <ul>
+                            <li><a href="#" class="fntClr3 big-link" title="연결끊기" id="disconnect" data-reveal-id="disconnect_modal" role="button">연결끊기</a></li>
+                            <li><a href="#" class="fntClr3" title="자동연결조회" id="delAutoconnect" role="button">자동연결조회</a></li>
+                            <li><a href="#" class="fntClr3" title="계정탈퇴하기" id="deleteAccount" role="button">계정탈퇴하기</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2 class="tit fntClr3">고객지원</h2>
+                        <ul>
+                            <li><a href="#" title="새창열림" class="fntClr3" target="_blank">이용안내</a></li>
+                            <li><a href="#" title="새창열림" class="fntClr3" target="_blank">고객센터</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div id="footer_unenable" class="bckClr6" style="display: none;position: absolute; inset: 89% 0% 5%; z-index: 9999; opacity: 0.5; border-radius: 0px 0px 15px 15px;"></div>
+            </nav>
+        </div>
+    </div>
+    
+    <div id="modal1" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-modal1" aria-describedby="DESC-modal1">
+        <h6 class="wa-hide" id="TITLE-modal1">알림창</h6>
+        <p id="DESC-modal1"></p>
+        <div class="ppBtnWrap2"><a href="#" title="확인" class="ppOkBtn close-reveal-modal" role="button">확인</a></div>
+    </div>
+    <div id="modal2" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-modal2" aria-describedby="DESC-modal2">
+        <h6 class="wa-hide" id="TITLE-modal2">알림창</h6>
+        <p id="DESC-modal2"></p>
+        <div class="ppBtnWrap">
+            <a href="#" title="취소" class="ppCnclBtn close-reveal-modal" role="button">취소</a>
+            <a href="#" title="확인" class="ppOkBtn close-reveal-modal" role="button">확인</a>
+        </div>
+    </div>
+    <div id="modal3" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-modal3" aria-describedby="DESC-modal3">
+        <h6 class="wa-hide" id="TITLE-modal3">알림창</h6>
+        <p id="DESC-modal3"></p>
+        <div class="ppBtnWrap2"><a href="#" title="확인" class="ppOkBtn close-reveal-modal" role="button">확인</a></div>
+    </div>
+    
+    <div id="close_modal" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-close_modal" aria-describedby="DESC-close_modal">
+        <h6 class="wa-hide" id="TITLE-close_modal">알림창</h6>
+        <p id="DESC-close_modal">클라우드 서비스를 종료하시겠습니까?</p>
+        <div class="ppBtnWrap">
+            <a id="closeCancelBtn" href="#" title="취소" class="ppCnclBtn close-reveal-modal" role="button">취소</a>
+            <a id="closeOkBtn" title="확인" onclick="messageSend('close');" href="#" class="ppOkBtn close-reveal-modal" role="button">확인</a>
+        </div> 
+    </div>
+    
+    <div id="disconnect_modal" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-disconnect_modal" aria-describedby="DESC-disconnect_modal">
+        <h6 class="wa-hide" id="TITLE-disconnect_modal">알림창</h6>
+        <p id="DESC-disconnect_modal">클라우드 연결을 끊습니다<br>(자동연결이 해제됩니다)</p>
+        <div class="ppBtnWrap">
+            <a id="disconnectCancelBtn" title="취소" href="#" class="ppCnclBtn close-reveal-modal" role="button">취소</a>
+            <a id="disconnectOkBtn" title="확인" href="#" class="ppOkBtn close-reveal-modal" role="button">확인</a>
+        </div> 
+    </div>
+    
+    <div id="autoconnect_modal" class="reveal-modal" role="alertdialog" aria-modal="true">
+    </div>
+    
+    <div id="myModal" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-myModal" aria-describedby="DESC-myModal">
+        <h6 class="wa-hide" id="TITLE-myModal">알림창</h6>
+        <p id="DESC-myModal">이동식디스크 종류를 선택해주세요</p>
+        <ul class="removableDiskList">
+        </ul>
+
+        <div class="ppBtnWrap">
+           <a href="#" class="ppCnclBtn close-reveal-modal" role="button">취소</a>
+           <a href="#" class="ppOkBtn close-reveal-modal" role="button">확인</a>
+        </div> 
+    </div>
+
+    <div id="unlock_modal" class="reveal-modal" role="alertdialog" aria-modal="true" aria-labelledby="TITLE-unlock_modal" aria-describedby="DESC-unlock_modal">
+        <h6 class="wa-hide" id="TITLE-unlock_modal">알림창</h6>
+        <p id="DESC-unlock_modal">인증서 잠금을 해제하시겠습니까?</p>
+        <div class="ppBtnWrap">
+            <a href="#" class="ppCnclBtn close-reveal-modal" role="button">취소</a>
+            <a href="#" class="ppOkBtn close-reveal-modal" role="button">확인</a>
+         </div> 
+    </div>
+    
+    <script src="/cloud/v1/styles/js/pushy.min.js"></script>
+    <script src="/cloud/v1/styles/js/jquery.reveal.js"></script>     
+    <iframe name='yettie_library_iframe' id='yettie_library_iframe'></iframe>
+
+</div>
+<!-- 클라우드인증 전체 감싸는 DIV END -->
+
+</html>

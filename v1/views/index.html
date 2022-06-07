@@ -1,0 +1,152 @@
+<!doctype html>
+
+<html lang="ko">
+    <head>
+        <title>클라우드 공동인증서 서비스</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="/cloud/v1/styles/css/tsign_cloud_style.css">
+        <script src="/cloud/v1/js/jquery-3.6.0.min.js"></script>
+        <style>
+            body {padding: 20px;}
+            #test_cloud_views {margin: 0 auto;width: 100%;border-collapse: collapse;border-spacing: 0;}
+            #test_cloud_views tbody th {padding: 10px 20px;border: 1px solid #d1d1d1;vertical-align: middle;background: #f1f1f1;}
+            #test_cloud_views tbody > tr.bg th,
+            #test_cloud_views tbody > tr.bg td {background: #f9f9db;} 
+            #test_cloud_views caption {font-size: 24px;padding: 20px 0;font-weight: bold;}
+            #test_cloud_views thead th {padding: 10px 20px;border: 1px solid #d1d1d1;background: #555;font-size: 18px;vertical-align: middle;color: #fff;}
+            #test_cloud_views td {padding: 10px 20px;;border: 1px solid #d1d1d1;letter-spacing: 1px;font-size: 14px;vertical-align: middle;line-height: 1.4;}
+            #test_cloud_views td a {text-decoration: none;}
+        </style>
+    </head>
+
+<body>
+<table id="test_cloud_views">
+    <caption>클라우드 인증 HTML 화면</caption>
+    <colgroup>
+    </colgroup>
+    <thead>
+        <tr>
+            <th scope="col">화면</th>
+            <th scope="col">파일명</th>
+            <th scope="col">비고</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="bg">
+            <th scope="row">HTML 템플릿(공통영역)</th>
+            <td><a href="template.html" target="_blank">template.html</a></td>
+            <td>
+                id="container" 영역에 DOM 변경<br><br>
+                이전버튼(class="prevBtn") => 취소 버튼으로 적용<br>
+                스크린블럭(id="screen_block")<br>
+                로딩이미지(id="loading_block") 화면별 제어<br>
+            </td>
+        </tr>
+        <tr class="bg">
+            <th scope="row">keypad(쿼티)</th>
+            <td><a href="keypad_qwerty.html" target="_blank">keypad_qwerty.html</a></td>
+            <td rowspan="2">https://github.com/ChoiJY/Javascript-IME-library</td>
+        </tr>
+        <tr class="bg">
+            <th scope="row">keypad(숫자)</th>
+            <td><a href="keypad_number.html" target="_blank">keypad_number.html</a></td>
+        </tr>
+        <tr>
+            <th scope="row">시작화면</th>
+            <td><a href="시작화면.html" target="_blank">시작화면.html</a></td>
+            <td>푸터링크 비활성(id="footer_unenable")</td>
+        </tr>
+        <tr>
+            <th scope="row" rowspan="2">약관동의</th>
+            <td><a href="약관동의_iframe.html" target="_blank">약관동의_iframe.html</a></td>
+            <td>iframe 으로 약관동의 페이지 불러오는 부모페이지</td>
+        </tr>
+        <tr>
+            <td><a href="약관동의.html" target="_blank">약관동의.html</a></td>
+            <td>https://center.signkorea.com:8700/notice/html/conditionsOfUse.html?moduleType=web 사용</td>
+        </tr>
+        <tr>
+            <th scope="row">인증코드</th>
+            <td><a href="인증코드.html" target="_blank">인증코드.html</a></td>
+            <td>푸터링크 비활성(id="footer_unenable")</td>
+        </tr>
+        <tr>
+            <th scope="row">인증서등록</th>
+            <td><a href="인증서등록.html" target="_blank">인증서등록.html</a></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">인증서가져오기</th>
+            <td><a href="인증서가져오기.html" target="_blank">인증서가져오기.html</a></td>
+            <td>이전버튼</td>
+        </tr>
+        <tr>
+            <th scope="row">스마트기기에서 가져오기</th>
+            <td><a href="인증서가져오기_스마트기기에서.html" target="_blank">인증서가져오기_스마트기기에서.html</a></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">인증서 파일로 가져오기(PC)</th>
+            <td><a href="인증서가져오기_파일로.html" target="_blank">인증서가져오기_파일로.html</a></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">인증서선택</th>
+            <td><a href="인증서선택.html" target="_blank">인증서선택.html</a></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">인증서 비밀번호 입력</th>
+            <td><a href="인증서비밀번호입력.html" target="_blank">인증서비밀번호입력.html</a></td>
+            <td>보안키패드(쿼티)/보안키패드</td>
+        </tr>
+        <tr>
+            <th scope="row">간편비밀번호 입력</th>
+            <td rowspan="5"><a href="간편비밀번호입력.html" target="_blank">간편비밀번호입력.html</a></td>
+            <td rowspan="5">보안키패드(숫자)/이전버튼</td>
+        </tr>
+        <tr>
+            <th scope="row">간편비밀번호 재입력</th>
+        </tr>
+        <tr>
+            <th scope="row">인증서 비밀번호변경</th>
+        </tr>
+        <tr>
+            <th scope="row">인증서 비밀번호변경2</th>
+        </tr>
+        <tr>
+            <th scope="row">인증서삭제</th>
+        </tr>
+        <tr>
+            <th scope="row">인증내역</th>
+            <td><a href="인증내역.html" target="_blank">인증내역.html</a></td>
+            <td>이전버튼</td>
+        </tr>
+        <tr>
+            <th scope="row">자동연결조회</th>
+            <td><a href="자동연결조회.html" target="_blank">자동연결조회.html</a></td>
+            <td>이전버튼</td>
+        </tr>
+        <tr>
+            <th scope="row">계정탈퇴하기</th>
+            <td><a href="계정탈퇴하기.html" target="_blank">계정탈퇴하기.html</a></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<iframe scrolling="no" id="test_cloud_frame" name="koscom_cloud_iframe" width="100%" height="100%" title="클라우드" style="top: 0px; left: 0px; position: fixed; z-index: 10000; border: none; display: none;"></iframe>
+
+<script>
+    $(function(){
+         // $("#test_cloud_views").on("click", "a", function(){
+         //     var addr = $(this).attr("href");
+         //     $("#test_cloud_frame").attr("src", addr).show();
+         //     return false;
+         // })
+    })
+</script>
+</body>
+</html>

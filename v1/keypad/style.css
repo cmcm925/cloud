@@ -1,0 +1,234 @@
+@charset "utf-8";
+
+.svk_keyboard *{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.svk_keyboard{
+    z-index: 100002;
+    opacity: 1;
+    background: #3e424a;
+    position: fixed;
+    top: 150%;
+    left: 50%;
+    margin-left: -222px;
+    width: 100%;
+    max-width: 444px;
+    list-style: none;
+    text-align: center;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    /* ie10 */
+    -ms-user-select: none;
+    user-select: none;
+}
+.svk_keyboard .svk_line1 {
+    padding-top: 0.5%;
+}
+.svk_keyboard .svk_line4 {
+    padding-bottom: 0.5%;
+}
+.svk_keyboard div:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.svk_keyboard button {
+    padding: 0;
+}
+.svk_keyboard button.svk_null{
+    opacity: 0;
+}
+
+.svk_keyboard .svk_uppercase {
+    text-transform: uppercase;
+}
+
+.svk_keyboard .svk_kr {
+    display: none;
+}
+
+.svk_keyboard .svk_others{
+    display:none;
+}
+
+.svk_keyboard .svk_upper{
+    display: none;
+}
+
+.svk_keyboard .svk_on {
+    display: none;
+}
+
+.svk_keyboard .svk_symbol:not(.svk_null):hover,
+.svk_keyboard .svk_letter:not(.svk_null):hover,
+.svk_keyboard .svk_number:not(.svk_null):hover{
+/*    transform: scale(1.1);*/
+}
+
+.svk_keyboard .svk_symbol{
+    float: left;
+    width: 8%;
+    height: 40px;
+    line-height: 40px;
+    background: #666;
+    color: #fff;
+    border: 2px solid #3e424a;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.svk_keyboard .svk_symbol span {
+    font-size: 16px;
+}
+
+.svk_keyboard .svk_symbol.svk_null{
+    width: 4%;
+}
+
+.svk_keyboard .svk_symbol.svk_del {
+    width: 16%;
+    font-size: 16px;
+    background: #555;
+}
+
+.svk_keyboard .svk_symbol.svk_tab{
+    width: 12%;
+    background: #555;
+}
+
+.svk_keyboard .svk_symbol.svk_enter{
+    width: 20%;
+    background: #555;
+}
+
+.svk_keyboard .svk_symbol.svk_shift{
+    width: 28%;
+    background: #555;
+}
+
+.svk_keyboard .svk_symbol.svk_space{
+    width: 79%;
+    background: #555;
+}
+
+.svk_keyboard .svk_symbol.svk_local{
+    width: 10.5%;
+    background: #555;
+}
+
+.svk_keyboard .svk_symbol.svk_specials{
+    width: 10.5%;
+    background: #555;
+    color: whitesmoke;
+}
+
+.svk_keyboard span[class="off"],
+.svk_keyboard span[class="on"],
+.svk_keyboard button[class="off"],
+.svk_keyboard button[class="on"]{
+    pointer-events: none;
+}
+
+.svk_keyboard .svk_letter{
+    float: left;
+    width: 8%;
+    height: 40px;
+    line-height: 40px;
+    background: #666;
+    color: #fff;
+    border: 2px solid #3e424a;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.svk_keyboard .svk_letter span {
+    font-size: 16px;
+}
+.svk_keyboard .svk_line3>.svk_letter.svk_null{
+    width: 5%;
+}
+
+.svk_keyboard .svk_letter.svk_null{
+    width: 4%;
+}
+
+.svk_keyboard .svk_letter.svk_local{
+    background: #555;
+    font-size: 16px;
+    width: 24%;
+}
+
+.svk_keyboard .svk_letter.svk_⌫{
+    background: #555;
+    font-size: 20px;
+    width: 16%;
+}
+
+.svk_keyboard .svk_letter.svk_del{
+    background: #555;
+    font-size: 16px;
+    width: 16%;
+}
+
+.svk_keyboard .svk_letter.svk_enter{
+    background: #555;
+    font-size: 16px;
+    width: 20%;
+}
+
+.svk_keyboard .svk_letter.svk_shift{
+    background: #555;
+    font-size: 16px;
+    width: 24%;
+}
+
+.svk_keyboard .svk_letter.svk_space{
+    background: #555;
+    font-size: 16px;
+    width: 76%;
+}
+
+.svk_keyboard .svk_number{
+    float: left;
+    width: calc(25% - 4px);
+    height: 50px;
+    line-height: 50px;
+    background: #666;
+    font-size: 20px;
+    margin: 2px;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: normal;
+    border: none;
+}
+
+.svk_keyboard .svk_number.svk_lastitem{
+}
+
+.svk_keyboard .svk_number.svk_close,
+.svk_keyboard .svk_number.svk_enter,
+.svk_keyboard .svk_number.svk_reset{
+    font-size: 18px;
+}
+
+.svk_keyboard .svk_number.svk_del{
+    font-size: 26px;
+}
+
+@media screen and (max-width:767px) {
+    .svk_keyboard{
+        left: 0;
+        margin-left: 0;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width:479px) {
+    .svk_keyboard .svk_number.svk_close,
+    .svk_keyboard .svk_number.svk_enter,
+    .svk_keyboard .svk_number.svk_reset{
+        font-size: 16px;
+    }
+}
