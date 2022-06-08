@@ -63,9 +63,9 @@
     display: none;
 }
 
-.svk_keyboard .svk_symbol:not(.svk_null):hover,
-.svk_keyboard .svk_letter:not(.svk_null):hover,
-.svk_keyboard .svk_number:not(.svk_null):hover{
+.svk_keyboard .svk_symbol:not(.svk_null):active,
+.svk_keyboard .svk_letter:not(.svk_null):active,
+.svk_keyboard .svk_number:not(.svk_null):active{
     transform: scale(1.1);
 }
 
