@@ -67,6 +67,7 @@
 .svk_keyboard .svk_letter:not(.svk_null):active,
 .svk_keyboard .svk_number:not(.svk_null):active{
     transform: scale(1.1);
+    box-shadow: 0 0 3px 1px rgba(0,0,0,0.4);
 }
 
 .svk_keyboard .svk_symbol{
