@@ -94,7 +94,7 @@
                         <input id="certpwd" title="비밀번호입력창" type="password" autocomplete="off" placeholder="인증서 비밀번호" class="intpwd form-input glow-shadow smooth-corner brdrClr3" style="margin:0;"><button type="button" class="btn-keypad hangulField" style="font-size:0;width:45px;height:45px;background: url(/cloud/v1/styles/images/ico_keyboard.png) center center no-repeat;background-size:30px;position: absolute;right:0;top:0;cursor: pointer;">가상키패드</button>
                     </div>
                     <div class="btnWrap">
-                        <a href="#" class="cancelBtn bckClr3 brdrClr1 fntClr1" title="취소">취소</a><a href="#" class="okBtn bckClr7 brdrClr1 fntClr5" title="확인">확인</a>
+                        <a href="#" class="cancelBtn bckClr3 brdrClr1 fntClr1" title="취소" id="lock">취소</a><a href="#" class="okBtn bckClr7 brdrClr1 fntClr5" title="확인" id="unlock">확인</a>
                     </div>
                 </div>
             </main>
@@ -199,17 +199,84 @@
 </div>
 <!-- 클라우드인증 전체 감싸는 DIV END -->
 <script>
-window.addEventListener("orientationchange", function(event) {
-    if (window.matchMedia('(orientation: portrait)').matches) {
-        // Portrait 모드일 때 실행할 스크립트
-        // 폭과 높이가 같으면 Portrait 모드로 인식돼요
-        alert('portrait');
-        event.preventDefault()
+var orientKey = 'orientation';
+if ('mozOrientation' in screen) {
+  orientKey = 'mozOrientation';
+} else if ('msOrientation' in screen) {
+  orientKey = 'msOrientation';
+}
+
+if (screen[orientKey]) {
+  function update() {
+    var type = screen[orientKey].type || screen[orientKey];
+    var landscape = type.indexOf('landscape') !== -1;
+    var rotate = type.indexOf('secondary') === -1 ? 0 : 180;
+    var rotateStr = 'rotate(' + rotate + 'deg)';
+  }
+
+  update();
+
+  var onOrientationChange = null;
+
+  if ('onchange' in screen[orientKey]) { // newer API
+    onOrientationChange = function () {
+      update();
+    };
+  
+    screen[orientKey].addEventListener('change', onOrientationChange);
+  } else if ('onorientationchange' in screen) { // older API
+    onOrientationChange = function () {
+      update();
+    };
+  
+    screen.addEventListener('orientationchange', onOrientationChange);
+  }
+
+  // browsers require full screen mode in order to obtain the orientation lock
+  var goFullScreen = null;
+  var exitFullScreen = null;
+  if ('requestFullscreen' in document.documentElement) {
+    goFullScreen = 'requestFullscreen';
+    exitFullScreen = 'exitFullscreen';
+  } else if ('mozRequestFullScreen' in document.documentElement) {
+    goFullScreen = 'mozRequestFullScreen';
+    exitFullScreen = 'mozCancelFullScreen';
+  } else if ('webkitRequestFullscreen' in document.documentElement) {
+    goFullScreen = 'webkitRequestFullscreen';
+    exitFullScreen = 'webkitExitFullscreen';
+  } else if ('msRequestFullscreen') {
+    goFullScreen = 'msRequestFullscreen';
+    exitFullScreen = 'msExitFullscreen';
+  }
+
+  document.getElementById('lock').addEventListener('click', function () {
+    document.documentElement[goFullScreen] && document.documentElement[goFullScreen]();
+
+    var promise = null;
+    if (screen[orientKey].lock) {
+      promise = screen[orientKey].lock(screen[orientKey].type);
     } else {
-        // Landscape 모드일 때 실행할 스크립트
-        alert('Landscape');
+      promise = screen.orientationLock(screen[orientKey]);
     }
-});
+
+    promise
+      .then(function () {
+      })
+      .catch(function (err) {
+        document[exitFullScreen] && document[exitFullScreen]();
+      });
+  });
+
+  document.getElementById('unlock').addEventListener('click', function () {
+    document[exitFullScreen] && document[exitFullScreen]();
+
+    if (screen[orientKey].unlock) {
+      screen[orientKey].unlock();
+    } else {
+      screen.orientationUnlock();
+    }
+  });
+}
 </script>
 </body>
 
