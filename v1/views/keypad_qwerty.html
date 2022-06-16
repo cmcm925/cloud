@@ -199,16 +199,15 @@
 </div>
 <!-- 클라우드인증 전체 감싸는 DIV END -->
 <script>
-document.addEventListener("orientationchange", function(event){
-    switch(window.orientation)
-    {
-        case -90: case 90:
-            /* Device is in landscape mode */
-            console.log('90')
-            break;
-        default:
-            /* Device is in portrait mode */
-            console.log('prtrait')
+window.addEventListener("orientationchange", function(event) {
+    if (window.matchMedia('(orientation: portrait)').matches) {
+        // Portrait 모드일 때 실행할 스크립트
+        // 폭과 높이가 같으면 Portrait 모드로 인식돼요
+        alert('portrait');
+        event.preventDefault()
+    } else {
+        // Landscape 모드일 때 실행할 스크립트
+        alert('Landscape');
     }
 });
 </script>
