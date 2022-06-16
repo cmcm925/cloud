@@ -198,7 +198,20 @@
 
 </div>
 <!-- 클라우드인증 전체 감싸는 DIV END -->
-
+<script>
+document.addEventListener("orientationchange", function(event){
+    switch(window.orientation)
+    {
+        case -90: case 90:
+            /* Device is in landscape mode */
+            console.log('90')
+            break;
+        default:
+            /* Device is in portrait mode */
+            console.log('prtrait')
+    }
+});
+</script>
 </body>
 
 </html>
